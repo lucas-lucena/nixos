@@ -120,6 +120,7 @@
       fcitx5-hangul	     # Korean
       fcitx5-nord            # a color theme
       fcitx5-m17n	     # Multi
+      fcitx5-configtool
     ];
   };
 
@@ -153,6 +154,26 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+
+  # Firmware for Realtek RTL8761b
+  hardware.firmware = [ pkgs.rtl8761b-firmware ];
+
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        Name = "Hello";
+        ControllerMode = "dual";
+        FastConnectable = "true";
+        Experimental = "true";
+      };
+      Policy = {
+        AutoEnable = "true";
+      };
+    };
+  };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -207,6 +228,7 @@
         nano
         vscode
 	git
+	appimage-run
 	vlc
 	mpv
 	mpc-qt
@@ -224,6 +246,7 @@
 	discord
 	wine
 	stremio
+	calibre
 
 	# Games section
 	steam
@@ -247,6 +270,8 @@
 	ryujinx		# Switch
 	flycast		# Dreamcast
 
+	# XP Pen Deco Driver
+	libsForQt5.xp-pen-deco-01-v2-driver
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
